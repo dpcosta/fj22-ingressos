@@ -1,6 +1,8 @@
-package br.com.caelum.ingresso.model;
+package br.com.caelum.ingresso.comparators;
 
 import java.util.Comparator;
+
+import br.com.caelum.ingresso.model.Sessao;
 
 public class SessaoComparator implements Comparator<Sessao> {
 

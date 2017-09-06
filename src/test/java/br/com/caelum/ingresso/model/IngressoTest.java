@@ -20,10 +20,11 @@ public class IngressoTest {
 	public void deveCustarPrecoDaSessaoQuandoNaoHaDesconto() {
 		
 		//arrange
+		Lugar lugar = new Lugar("A",1);
 		Sessao sessao = criaSessaoDeTrintaReais();
 		
 		//act
-		Ingresso ingresso = new Ingresso(sessao, new SemDesconto());
+		Ingresso ingresso = new Ingresso(sessao, TipoDeIngresso.INTEIRO, lugar);
 		
 		//assert
 		BigDecimal valorEsperado = new BigDecimal("30.0");
@@ -36,9 +37,10 @@ public class IngressoTest {
 	@Test
 	public void deveCustarMetadeDaSessaoQuandoEstudante(){
 		
+		Lugar lugar = new Lugar("A",1);
 		Sessao sessao = criaSessaoDeTrintaReais();
 		
-		Ingresso ingresso = new Ingresso(sessao, new DescontoEstudante());
+		Ingresso ingresso = new Ingresso(sessao, TipoDeIngresso.ESTUDANTE, lugar);
 		
 		BigDecimal valorEsperado = new BigDecimal("15");
 		BigDecimal valorRetornado = ingresso.getPreco();
@@ -48,9 +50,11 @@ public class IngressoTest {
 	
 	@Test
 	public void deveCustarTrintaPorCentoQuandoBanco(){
+		
+		Lugar lugar = new Lugar("A",1);
 		Sessao sessao = criaSessaoDeTrintaReais();
 		
-		Ingresso ingresso = new Ingresso(sessao, new DescontoCartaoBanco());
+		Ingresso ingresso = new Ingresso(sessao, TipoDeIngresso.BANCO, lugar);
 		
 		BigDecimal valorEsperado = new BigDecimal("21.00");
 		BigDecimal valorRetornado = ingresso.getPreco();

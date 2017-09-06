@@ -10,7 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by nando on 03/03/17.
@@ -71,5 +77,38 @@ public class FilmeController {
     public void delete(@PathVariable("id") Integer id){
         filmeDao.delete(id);
     }
+    
+    private static String retornaNome(Filme filme){
+    	return filme.getNome();
+    }
+    
+    public static void main(String[] args) {
+    	List<Filme> filmes = new ArrayList<>();
+    	
+    	Filme filme1 = new Filme("duro de matar", Duration.ofMinutes(120), "Ação");
+    	Filme filme2 = new Filme("poiu", Duration.ofMinutes(160), "Drama");
+    	Filme filme3 = new Filme("qwert", Duration.ofMinutes(90), "Terror");
+    	
+    	filmes.add(filme1);
+    	filmes.add(filme2);
+    	filmes.add(filme3);
+    	
+    	for (Filme filme : filmes) {
+			System.out.println(filme.getNome());
+		}
+    	
+//    	filmes.removeIf(filme -> filme.getNome().startsWith("d"));
+//    	
+//    	filmes.forEach(filme -> System.out.println(filme.getNome()));
+    	
+    	
+    	filmes.sort(new FilmeComparatorPorDuracao());
+    	
+    	
+    	
+    	List<String> nomes = filmes.stream().map(filme -> filme.getNome()).collect(Collectors.toList());
+    	
+    	nomes.forEach(nome -> System.out.println(nome));
+	}
 
 }

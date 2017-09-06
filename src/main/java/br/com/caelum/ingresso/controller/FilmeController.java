@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,10 +85,11 @@ public class FilmeController {
     
     public static void main(String[] args) {
     	List<Filme> filmes = new ArrayList<>();
+    	BigDecimal precoPadrao = new BigDecimal("12.0");
     	
-    	Filme filme1 = new Filme("duro de matar", Duration.ofMinutes(120), "Ação");
-    	Filme filme2 = new Filme("poiu", Duration.ofMinutes(160), "Drama");
-    	Filme filme3 = new Filme("qwert", Duration.ofMinutes(90), "Terror");
+    	Filme filme1 = new Filme("duro de matar", Duration.ofMinutes(120), "Ação", precoPadrao);
+    	Filme filme2 = new Filme("poiu", Duration.ofMinutes(160), "Drama", precoPadrao);
+    	Filme filme3 = new Filme("qwert", Duration.ofMinutes(90), "Terror", precoPadrao);
     	
     	filmes.add(filme1);
     	filmes.add(filme2);

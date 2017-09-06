@@ -1,5 +1,6 @@
 package br.com.caelum.ingresso.controller;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -72,13 +73,15 @@ public class SessaoController {
 		LocalTime vinteHoras = LocalTime.of(20, 00);
 		LocalTime dezManha = LocalTime.of(10, 00);
 		
+		BigDecimal precoPadrao = new BigDecimal("12.0");
 		
-		Filme hp1 = new Filme("Harry Potter 1", Duration.ofMinutes(120), "Aventura");
-		Filme hp2 = new Filme("Harry Potter 2", Duration.ofMinutes(120), "Aventura");
-		Filme mmf = new Filme("Meu Malvado Favorito", Duration.ofMinutes(90), "Infantil");
-		Filme nemo = new Filme("Procurando Nemo", Duration.ofMinutes(105), "Infantil");
 		
-		Sala sala = new Sala("3D");
+		Filme hp1 = new Filme("Harry Potter 1", Duration.ofMinutes(120), "Aventura", precoPadrao);
+		Filme hp2 = new Filme("Harry Potter 2", Duration.ofMinutes(120), "Aventura", precoPadrao);
+		Filme mmf = new Filme("Meu Malvado Favorito", Duration.ofMinutes(90), "Infantil", precoPadrao);
+		Filme nemo = new Filme("Procurando Nemo", Duration.ofMinutes(105), "Infantil", precoPadrao);
+		
+		Sala sala = new Sala("3D", precoPadrao);
 		
 		Sessao sessao1 = new Sessao(duasEMeiaDaTarde, hp1, sala);
 		

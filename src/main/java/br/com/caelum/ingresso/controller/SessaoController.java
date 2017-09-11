@@ -26,6 +26,7 @@ import br.com.caelum.ingresso.comparators.SessaoComparator;
 import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
+import br.com.caelum.ingresso.model.Carrinho;
 import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.ImagemCapa;
 import br.com.caelum.ingresso.model.Sala;
@@ -48,6 +49,9 @@ public class SessaoController {
 	
 	@Autowired
 	private ImdbClient client;
+	
+	@Autowired
+	private Carrinho carrinho;
 
 	@GetMapping("/admin/sessao")
 	public ModelAndView form(@RequestParam("salaId") int salaId, SessaoForm form){
@@ -77,12 +81,13 @@ public class SessaoController {
 	public ModelAndView lugaresNaSessao(@PathVariable("id") Integer sessaoId){
 		ModelAndView modelAndView = new ModelAndView("sessao/lugares");
 		
-		
 		Sessao sessao = sessaoDao.findOne(sessaoId);
-		modelAndView.addObject("sessao", sessao);
 		Optional<ImagemCapa> imagemCapa = client.request(sessao.getFilme(), ImagemCapa.class);
-		modelAndView.addObject("imagemCapa", imagemCapa .orElse(new ImagemCapa()));
+		
+		modelAndView.addObject("sessao", sessao);
+		modelAndView.addObject("imagemCapa", imagemCapa.orElse(new ImagemCapa()));
 		modelAndView.addObject("tiposDeIngressos", TipoDeIngresso.values());
+		modelAndView.addObject("carrinho", carrinho);
 		
 		return modelAndView;
 	}

@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -105,5 +106,4 @@ public class Sessao {
 	public boolean isDisponivel(Lugar lugar){
 		return ingressos.stream().map(Ingresso::getLugar).noneMatch(l -> l.equals(lugar));
 	}
-
 }
